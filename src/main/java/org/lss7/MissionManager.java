@@ -7,19 +7,20 @@ import java.util.Arrays;
 import java.util.List;
 
 import static java.lang.Integer.parseInt;
+import static java.lang.Integer.signum;
 
-public class MissionManager {
+public class MissionManager extends Thread{
     WebDriver driver;
-    ArrayList<Mission> missionArrayList;
     byte LFZpop;
     byte SFZpop;
     boolean MTWenable;
     byte MTWpop;
     String[] vehiclelist;
     byte LFMTWswitchpop;
+    Statistics stats;
     public MissionManager(WebDriver driver){
         this.driver = driver;
-        missionArrayList = new ArrayList<Mission>();
+        stats = new Statistics();
         driver.get("https://www.leitstellenspiel.de/");
         driver.findElement(By.cssSelector("#mission_select_attended")).click();
         driver.findElement(By.cssSelector("#mission_select_finishing")).click();
@@ -73,7 +74,13 @@ public class MissionManager {
                 try {
                     fullmissingAL = new ArrayList<String>(Arrays.asList(driver.findElement(By.cssSelector("#missing_text > div:nth-child(1)")).getText().split(":")));
                 }catch (NoSuchElementException e){
-                    driver.findElement(By.linkText("Gefangene entlassen")).click();
+                    try {
+                        driver.findElement(By.linkText("Gefangene entlassen")).click();
+                    }catch (NoSuchElementException f){
+                        driver.findElement(By.linkText("RTW - Sprechwunsch bearbeiten")).click();
+                        driver.findElement(By.linkText("Ohne Transport entlassen  (keine Vergütung)")).click();
+                        continue missions;
+                    }
                     continue missions;
                 }
 
@@ -205,22 +212,75 @@ public class MissionManager {
         }
         driver.get("https://www.leitstellenspiel.de/");
     }
+    public void run(){
+        while (true){
+            manage();
+            try {
+                sleep(3000);
+            } catch (InterruptedException e) {
+            }
+        }
+    }
     private boolean send(int num,String vehicle) throws UnhandledAlertException{
         try {
             driver.findElement(By.linkText(""+num+vehicle)).click();
             System.out.println("Sent:"+num+" "+vehicle);
+            stats.addvehiclepoint(vehicle,num);
             return true;
         }catch (NoSuchElementException g){
             System.out.println("Missing AAO: "+num+vehicle);
             return false;
+        }catch (UnhandledAlertException e){
+            stats.addmissingpoint(vehicle,num);
+            throw e;
         }
     }
 }
-class Mission{
-    int id;
-    String name;
-    public Mission(int id,String name){
-        this.id=id;
-        this.name=name;
+class Statistics{
+    ArrayList<vehicleStatistics> vehiclestatistics;
+    public Statistics() {
+        vehiclestatistics = new ArrayList<>();
+    }
+    public void addvehiclepoint(String vehicle,int i){
+        for(vehicleStatistics var: vehiclestatistics){
+            if(var.getVehicle().equals(vehicle)){
+                ConfigWriter.saveStatistics("Avalible: "+vehicle,""+var.add(i));
+                return;
+            }
+        }
+        vehicleStatistics var = new vehicleStatistics(vehicle);
+        ConfigWriter.saveStatistics("Missing: "+vehicle,""+var.addmissing(i));
+        vehiclestatistics.add(var);
+
+    }
+    public void addmissingpoint(String vehicle,int i){
+        for(vehicleStatistics var: vehiclestatistics){
+            if(var.getVehicle().equals(vehicle)){
+                ConfigWriter.saveStatistics("Missing: "+vehicle,""+var.addmissing(i));
+                return;
+            }
+        }
+        vehicleStatistics var = new vehicleStatistics(vehicle);
+        ConfigWriter.saveStatistics("Missing: "+vehicle,""+var.addmissing(i));
+        vehiclestatistics.add(var);
+    }
+}
+class vehicleStatistics{
+    String vehicle;
+    int activated;
+    int missing;
+    public vehicleStatistics(String vehicle){
+        this.vehicle=vehicle;
+    }
+    public int add(int i){
+        activated+=i;
+        return activated;
+    }
+    public String getVehicle(){
+        return vehicle;
+    }
+    public int addmissing(int i){
+        missing+=i;
+        return missing;
     }
 }

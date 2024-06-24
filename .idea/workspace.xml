@@ -5,11 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="deb244e3-78ae-4d0e-bce0-b4bf57048783" name="Changes" comment="--------">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/statistics.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/lss7/ConfigReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/lss7/ConfigReader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/lss7/ConfigWriter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/lss7/ConfigWriter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/lss7/LSSDriver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/lss7/LSSDriver.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/lss7/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/lss7/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/lss7/MissionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/lss7/MissionManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/lss7/StationManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/lss7/StationManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/config.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/config.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/logintemplate.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/logintemplate.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/stations.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/stations.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -140,7 +144,7 @@
       <workItem from="1718929844882" duration="607000" />
       <workItem from="1718959870937" duration="20561000" />
       <workItem from="1719166966379" duration="8302000" />
-      <workItem from="1719221369415" duration="1296000" />
+      <workItem from="1719221369415" duration="13426000" />
     </task>
     <task id="LOCAL-00001" summary="--------">
       <created>1718968212151</created>
@@ -149,7 +153,14 @@
       <option name="project" value="LOCAL" />
       <updated>1718968212151</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="--------">
+      <created>1719222965789</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1719222965789</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -189,21 +200,6 @@
           <properties class="java.lang.NullPointerException" package="java.lang" />
           <option name="timeStamp" value="1" />
         </breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/org/lss7/MissionManager.java</url>
-          <line>209</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/org/lss7/MissionManager.java</url>
-          <line>210</line>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/org/lss7/MissionManager.java</url>
-          <line>95</line>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>

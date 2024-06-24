@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.Properties;
 
 public class ConfigReader {
@@ -47,19 +48,22 @@ public class ConfigReader {
         String ret = getFile(configFile,config);
         return ret.split("_");
     }
-    public static String[] readlogin(){
-        File configFile;
-        try {
-            configFile = new File("src/main/resources/login.properties");
-        }catch (NullPointerException e){
-            configFile = new File("src/main/resources/logintemplate.properties");
+    public static String[][] readlogin(){
+        File configFile = new File("src/main/resources/login.properties");
+        ArrayList<String[]> reta = new ArrayList<String[]>();
+        int i = 1;
+        while (true){
+            String var = getFile(configFile,"Log"+i);
+            i++;
+            if (var==null||var.equals("")){
+                break;
+            }else {
+                reta.add(var.split(","));
+            }
         }
-        String[] ret = new String[2];
-        ret[0] = getFile(configFile,"Login");
-        ret[1] = getFile(configFile,"PW");
-        if (ret[0]==""||ret[1]==""){
-            System.err.println("No login!");
-            System.exit(-1);
+        String[][] ret = new String[reta.size()][];
+        for (int j = 0; j<reta.size();j++){
+            ret[j] = reta.get(j);
         }
         return ret;
     }

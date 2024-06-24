@@ -8,10 +8,17 @@ public class LSSDriver extends ChromeDriver {
     private final String mainWindowHandle;
     private String stationWindowHandle;
     private String missionWindowHandle;
+    private MissionManager missionManager;
     public LSSDriver(ChromeOptions options){
         super(options);
         active = false;
         this.mainWindowHandle = getWindowHandle();
+    }
+    public void attachMissionManager(){
+        missionManager = new MissionManager(this);
+    }
+    public void runMissionManager() {
+        missionManager.start();
     }
     public void setMissionWindowHandle(String missionWindowHandle){
         this.missionWindowHandle = missionWindowHandle;

@@ -4,18 +4,19 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
 import java.util.Properties;
 
 public class ConfigWriter {
     private static void setFile(File configFile,String config, String value) {
         Properties props = new Properties();
-        try (FileReader reader = new FileReader(configFile)) {
+        try (FileReader reader = new FileReader(configFile, StandardCharsets.ISO_8859_1)) {
             props.load(reader);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        try (FileWriter writer = new FileWriter(configFile)) {
+        try (FileWriter writer = new FileWriter(configFile, StandardCharsets.ISO_8859_1)) {
             props.setProperty(config, value);
             props.store(writer, null);
         } catch (IOException e) {
@@ -44,6 +45,11 @@ public class ConfigWriter {
             }
         }
         setFile(configFile,"Stationlist",var+" "+value);
+    }
+
+    public static void saveStatistics(String config, String value){
+        File configFile = new File("src/main/resources/statistics.properties");
+        setFile(configFile,config,value);
     }
     public static void main(String args[]){
         addStation("007");
