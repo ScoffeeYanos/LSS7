@@ -3,12 +3,13 @@ package org.lss7;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.Properties;
 
 public class ConfigReader {
     private static String getFile(File configFile,String config){
         try{
-            FileReader reader = new FileReader(configFile);
+            FileReader reader = new FileReader(configFile, StandardCharsets.ISO_8859_1);
             Properties props = new Properties();
             props.load(reader);
             String ret = props.getProperty(config);
@@ -20,7 +21,7 @@ public class ConfigReader {
     }
     private static Properties getFile(File configFile){
         try{
-            FileReader reader = new FileReader(configFile);
+            FileReader reader = new FileReader(configFile, StandardCharsets.ISO_8859_1);
             Properties props = new Properties();
             props.load(reader);
             reader.close();

@@ -1,6 +1,7 @@
 package org.lss7;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 
 import java.time.LocalDate;
@@ -28,13 +29,14 @@ public class StationManager extends Thread{
                             parseInt(ConfigReader.readStation(stationListSplit[i] + ".pops")),
                             LocalDate.parse(ConfigReader.readStation(stationListSplit[i] + ".recruitment"))));
                 }
-                assertStations();
             }
-
+            assertStations();
         }//Fileload
+        for(Station station:stationArrayList){
+            station.save();
+        }
     }
     public void run(){
-        stationArrayList.get(0).save();
         System.out.println("new run");
     }
     public void assertStations(){
@@ -51,13 +53,35 @@ public class StationManager extends Thread{
             if(var==true){
                 stationArrayList.get(i).setLevel(parseInt(driver.findElement(By.cssSelector("#iframe-inside-container > dl > dd:nth-child(2)")).getText().split(" ")[0]));
                 stationArrayList.get(i).setPops(parseInt(driver.findElement(By.cssSelector("#iframe-inside-container > dl > dd:nth-child(10)")).getText().split(" ")[0]));
-                driver.findElement(By.cssSelector("#building-navigation-container > a:nth-child(2)")).click();
-                if (driver.findElement(By.cssSelector("#iframe-inside-container > div.building-title > h1")).getText().equals(stationArrayList.get(0).getName())){
+                driver.findElement(By.linkText("Nächstes Gebäude")).click();
+                if (driver.findElement(By.cssSelector("#iframe-inside-container > div.building-title > h1")).getText().equals(stationArrayList.get(stationArrayList.size()-1).getName())){
+                    System.out.println("Cycled");
+                    break;
+                }
+            }else{
+                analyzePage();
+                driver.findElement(By.linkText("Nächstes Gebäude")).click();
+                if (driver.findElement(By.cssSelector("#iframe-inside-container > div.building-title > h1")).getText().equals(stationArrayList.get(stationArrayList.size()-1).getName())){
                     System.out.println("Cycled");
                     break;
                 }
             }
-            analyzePage();
+        }
+    }
+    public void recruitment(){
+        for (Station station:stationArrayList){
+            if(station.getRecruitment().isBefore(LocalDate.now())){
+                driver.get("https://www.leitstellenspiel.de/buildings/"+station.getID()+"/hire");
+                try {
+                    driver.findElement(By.linkText("Einstellungsphase abbrechen"));
+                    System.out.println("No Date for: "+station.getName());
+                }catch (NoSuchElementException e){
+                    driver.findElement(By.linkText("3 Tage werben")).click();
+                    station.resetRecruitment();
+                }
+            }else{
+                System.out.println("No Recruitment needed for: "+station.getName());
+            }
         }
     }
     public void analyzePage(){
@@ -86,6 +110,8 @@ class Station{
     }
     public LocalDate resetRecruitment(){
         recruitment = LocalDate.now().plusDays(3);
+        ConfigWriter.saveStation(name+".recruitment",recruitment.toString());
+        System.out.println("New Recruitment Date for: "+name);
         return recruitment;
     }
     public void save(){

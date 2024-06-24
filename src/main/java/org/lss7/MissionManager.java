@@ -69,7 +69,15 @@ public class MissionManager {
                         continue;
                     }
                 }//check for missing list and update in catch
-                ArrayList<String> fullmissingAL = new ArrayList<String>(Arrays.asList(driver.findElement(By.cssSelector("#missing_text > div:nth-child(1)")).getText().split(":")));
+                ArrayList<String> fullmissingAL;
+                try {
+                    fullmissingAL = new ArrayList<String>(Arrays.asList(driver.findElement(By.cssSelector("#missing_text > div:nth-child(1)")).getText().split(":")));
+                }catch (NoSuchElementException e){
+                    driver.findElement(By.linkText("Gefangene entlassen")).click();
+                    continue missions;
+                }
+
+
                 int j = 2;
                 while (true){
                     try {

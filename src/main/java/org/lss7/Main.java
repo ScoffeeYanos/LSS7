@@ -43,6 +43,7 @@ public class Main {
         }//Accept Cookies && Daily abholen
         {
             //stationManager = new StationManager(driver);
+            //stationManager.recruitment();
             //stationManager.start();
             missionManager = new MissionManager(driver);
             while (true)

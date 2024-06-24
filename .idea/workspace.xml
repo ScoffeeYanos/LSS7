@@ -4,22 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="deb244e3-78ae-4d0e-bce0-b4bf57048783" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/lss7/ConfigReader.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/lss7/ConfigWriter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/lss7/LSSDriver.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/lss7/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/lss7/MissionManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/lss7/StationManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/config.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/logintemplate.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/missions.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/stations.properties" afterDir="false" />
+    <list default="true" id="deb244e3-78ae-4d0e-bce0-b4bf57048783" name="Changes" comment="--------">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/lss7/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/lss7/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/lss7/MissionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/lss7/MissionManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/lss7/StationManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/lss7/StationManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/config.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/config.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/stations.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/stations.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,6 +63,9 @@
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\proj\LSS7\LSS7\src\main\resources" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\proj\LSS7\src\main\resources" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="org.lss7" />
@@ -144,8 +138,18 @@
       <workItem from="1718690094057" duration="8665000" />
       <workItem from="1718876268550" duration="14371000" />
       <workItem from="1718929844882" duration="607000" />
-      <workItem from="1718959870937" duration="6279000" />
+      <workItem from="1718959870937" duration="20561000" />
+      <workItem from="1719166966379" duration="8302000" />
+      <workItem from="1719221369415" duration="1296000" />
     </task>
+    <task id="LOCAL-00001" summary="--------">
+      <created>1718968212151</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1718968212151</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -156,11 +160,27 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="HEAD" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="--------" />
+    <option name="LAST_COMMIT_MESSAGE" value="--------" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -171,8 +191,18 @@
         </breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/org/lss7/MissionManager.java</url>
-          <line>173</line>
-          <option name="timeStamp" value="6" />
+          <line>209</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/lss7/MissionManager.java</url>
+          <line>210</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/lss7/MissionManager.java</url>
+          <line>95</line>
+          <option name="timeStamp" value="4" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
