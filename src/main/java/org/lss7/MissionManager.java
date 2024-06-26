@@ -68,6 +68,8 @@ public class MissionManager extends Thread{
                         }catch (Exception e){}
                     }catch (UnhandledAlertException e){
                         continue;
+                    }catch (NoSuchElementException e){
+                        continue missions;
                     }
                 }//check for missing list and update in catch
                 ArrayList<String> fullmissingAL;
@@ -157,17 +159,26 @@ public class MissionManager extends Thread{
                                 i = parseInt(var);
                             }catch (NumberFormatException e){
                                 if(var.equals("Wasser")){
-                                    if (i>10000){
-                                        if (!send(i/10000,"SW")){continue missions;}else{SWZ+=i/10000;}
+                                    int SWlim = 25000;
+                                    if (i>SWlim){
+                                        if (!send(i/SWlim,"SW")){continue missions;}else{SWZ+=i/SWlim;}
+                                    }
+                                    int TWlim = 30000;
+                                    int TWs = 0;
+                                    if (i>TWlim){
+                                        if (!send(i/TWlim,"TW")){continue missions;}else{TWs+=i/TWlim;}
                                     }
                                     int LFwater=1600;
-                                    i = (int) (i-(LFZ*LFwater*(1+(SWZ*0.25))));
+                                    int TWwater=20000;
+                                    i = (int) (i-(TWs*TWwater*(1+SWZ*0.25))-(LFZ*LFwater*(1+(SWZ*0.25))));
                                     if (i>0){
                                         int lfsend = (int) (i/(LFwater*(1+(SWZ*0.25))));
                                         if((i%LFwater*(1+(SWZ*0.25)))!=0){
                                             lfsend++;
                                         }
-                                        if (!send(lfsend,"LF")){continue missions;}
+                                        if (lfsend>0){
+                                            if (!send(lfsend,"LF")){continue missions;}
+                                        }
                                     }
                                 }
                             }
@@ -222,17 +233,32 @@ public class MissionManager extends Thread{
         }
     }
     private boolean send(int num,String vehicle) throws UnhandledAlertException{
-        try {
-            driver.findElement(By.linkText(""+num+vehicle)).click();
-            System.out.println("Sent:"+num+" "+vehicle);
-            stats.addvehiclepoint(vehicle,num);
-            return true;
-        }catch (NoSuchElementException g){
-            System.out.println("Missing AAO: "+num+vehicle);
-            return false;
-        }catch (UnhandledAlertException e){
-            stats.addmissingpoint(vehicle,num);
-            throw e;
+        if (num>10){
+            try {
+                driver.findElement(By.linkText(""+10+vehicle)).click();
+                System.out.println("Sent:"+10+" "+vehicle);
+                stats.addvehiclepoint(vehicle,10);
+                return send(num-10,vehicle);
+            }catch (NoSuchElementException g){
+                System.out.println("Missing AAO: "+10+vehicle);
+                return false;
+            }catch (UnhandledAlertException e){
+                stats.addmissingpoint(vehicle,10);
+                throw e;
+            }
+        }else{
+            try {
+                driver.findElement(By.linkText(""+num+vehicle)).click();
+                System.out.println("Sent:"+num+" "+vehicle);
+                stats.addvehiclepoint(vehicle,num);
+                return true;
+            }catch (NoSuchElementException g){
+                System.out.println("Missing AAO: "+num+vehicle);
+                return false;
+            }catch (UnhandledAlertException e){
+                stats.addmissingpoint(vehicle,num);
+                throw e;
+            }
         }
     }
 }
